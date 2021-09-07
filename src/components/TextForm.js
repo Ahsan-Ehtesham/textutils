@@ -39,7 +39,7 @@ const TextForm = (props) => {
   };
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
-    setText(newText.join(" "))
+    setText(newText.join(" "));
   };
   const handleClearClick = () => {
     let newText = "";
@@ -51,15 +51,19 @@ const TextForm = (props) => {
   const [text, setText] = useState("");
   let noOfWords = text.split(" ").length;
   return (
-    <div>
+    <div style={{ color: props.mode === "light" ? "#24292e" : "white" }}>
       <div>
-        <h1 className="text-center text-uppercase mb-3">{props.heading}</h1>
+        <h1 className="text-center text-uppercase mb-3 display-5">{props.heading}</h1>
         <textarea
           className="form-control"
           value={text}
           onChange={handleOnChange}
           id="myBox"
           rows="12"
+          style={{
+            backgroundColor: props.mode === "light" ? "white" : "#24292e",
+            color: props.mode === "light" ? "black" : "white",
+          }}
         ></textarea>
       </div>
       <button
@@ -112,12 +116,12 @@ const TextForm = (props) => {
         Clear Text
       </button>
       <div className="my-3">
-        <h2>Text Summary</h2>
-        <p>
+        <h2 className="display-6">Text Summary</h2>
+        <p className="lead">
           {noOfWords} words and {text.length} characters
         </p>
-        <p>{noOfWords * 0.008} Minutes to read</p>
-        <h2>Preview</h2>
+        <p className="lead">{noOfWords * 0.008} Minutes to read</p>
+        <h2 className="display-6">Preview</h2>
         <p>{text}</p>
       </div>
     </div>
