@@ -1,0 +1,135 @@
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+
+const TextForm = (props) => {
+  const handleUpClick = () => {
+    let newText = text.toUpperCase();
+    setText(newText);
+  };
+  const handleLowerClick = () => {
+    let newText = text.toLowerCase();
+    setText(newText);
+  };
+  const handleCamClick = () => {
+    let newText = function camalize(str) {
+      return str
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+(.)/g, function (match, chr) {
+          return chr.toUpperCase();
+        });
+    };
+    setText(newText);
+  };
+  const handleSnakeClick = () => {
+    let newText = (str) =>
+      str &&
+      str
+        .match(
+          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        )
+        .map((x) => x.toLowerCase())
+        .join("_");
+    setText(newText);
+  };
+
+  const handleCopy = () => {
+    let newText = document.getElementById("myBox");
+    newText.select();
+    navigator.clipboard.writeText(newText.value);
+  };
+  const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "))
+  };
+  const handleClearClick = () => {
+    let newText = "";
+    setText(newText);
+  };
+  const handleOnChange = (event) => {
+    setText(event.target.value);
+  };
+  const [text, setText] = useState("");
+  let noOfWords = text.split(" ").length;
+  return (
+    <div>
+      <div>
+        <h1 className="text-center text-uppercase mb-3">{props.heading}</h1>
+        <textarea
+          className="form-control"
+          value={text}
+          onChange={handleOnChange}
+          id="myBox"
+          rows="12"
+        ></textarea>
+      </div>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleUpClick}
+      >
+        Uppercase
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleLowerClick}
+      >
+        Lowercase
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleCamClick}
+      >
+        Camel case
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleSnakeClick}
+      >
+        Snake case
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleCopy}
+      >
+        Copy
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3 me-2"
+        onClick={handleExtraSpaces}
+      >
+        Remove Extra Spaces
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary mt-3"
+        onClick={handleClearClick}
+      >
+        Clear Text
+      </button>
+      <div className="my-3">
+        <h2>Text Summary</h2>
+        <p>
+          {noOfWords} words and {text.length} characters
+        </p>
+        <p>{noOfWords * 0.008} Minutes to read</p>
+        <h2>Preview</h2>
+        <p>{text}</p>
+      </div>
+    </div>
+  );
+};
+
+export default TextForm;
+
+TextForm.propTypes = {
+  heading: PropTypes.string.isRequired,
+};
+
+TextForm.defaultProps = {
+  heading: "Enter the text to analyze below",
+};
