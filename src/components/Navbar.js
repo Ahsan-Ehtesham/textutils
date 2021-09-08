@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../logo.svg";
+import logo from "../logo.png";
 import PropTypes from "prop-types";
 
 const Navbar = (props) => {
@@ -14,7 +14,7 @@ const Navbar = (props) => {
             alt=""
             width="50"
             height="44"
-            className="d-inline-block align-text-center"
+            className="d-inline-block me-2 align-text-center"
           />
           {props.title}
         </a>
@@ -42,6 +42,24 @@ const Navbar = (props) => {
               </a>
             </li>
           </ul>
+          <div
+            className={`form-check form-switch me-2 text-${
+              props.mode === "light" ? "dark" : "danger"
+            }`}
+          >
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="flexSwitchCheckDefault"
+              onClick={props.draculaMode}
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Dracula Mode
+            </label>
+          </div>
           <div
             className={`form-check form-switch me-2 text-${
               props.mode === "light" ? "dark" : "light"

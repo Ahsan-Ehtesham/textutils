@@ -5,10 +5,12 @@ const TextForm = (props) => {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to Uppercase", "success");
   };
   const handleLowerClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to Lowercase", "success");
   };
   const handleCamClick = () => {
     let newText = function camalize(str) {
@@ -19,6 +21,7 @@ const TextForm = (props) => {
         });
     };
     setText(newText);
+    props.showAlert("Converted to Camelcase", "success");
   };
   const handleSnakeClick = () => {
     let newText = (str) =>
@@ -30,30 +33,36 @@ const TextForm = (props) => {
         .map((x) => x.toLowerCase())
         .join("_");
     setText(newText);
+    props.showAlert("Converted to Snakecase", "success");
   };
 
   const handleCopy = () => {
     let newText = document.getElementById("myBox");
     newText.select();
     navigator.clipboard.writeText(newText.value);
+    props.showAlert("Text Copied", "success");
   };
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Extra Spaces Removed", "success");
   };
   const handleClearClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Text Cleared", "success");
   };
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
   const [text, setText] = useState("");
-  let noOfWords = text.split(" ").length;
+  let noOfWords = text.length > 0 ? text.trim().split(" ").length : 0;
   return (
     <div style={{ color: props.mode === "light" ? "#24292e" : "white" }}>
       <div>
-        <h1 className="text-center text-uppercase mb-3 display-5">{props.heading}</h1>
+        <h1 className="text-center text-uppercase mb-3 display-5">
+          {props.heading}
+        </h1>
         <textarea
           className="form-control"
           value={text}
