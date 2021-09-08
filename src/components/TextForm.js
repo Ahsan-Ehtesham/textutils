@@ -7,11 +7,13 @@ const TextForm = (props) => {
     setText(newText);
     props.showAlert("Converted to Uppercase", "success");
   };
+
   const handleLowerClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
     props.showAlert("Converted to Lowercase", "success");
   };
+
   const handleCamClick = () => {
     let newText = function camalize(str) {
       return str
@@ -23,6 +25,7 @@ const TextForm = (props) => {
     setText(newText);
     props.showAlert("Converted to Camelcase", "success");
   };
+
   const handleSnakeClick = () => {
     let newText = (str) =>
       str &&
@@ -37,26 +40,30 @@ const TextForm = (props) => {
   };
 
   const handleCopy = () => {
-    let newText = document.getElementById("myBox");
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
+    navigator.clipboard.writeText(text);
     props.showAlert("Text Copied", "success");
   };
+
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
     props.showAlert("Extra Spaces Removed", "success");
   };
+
   const handleClearClick = () => {
     let newText = "";
     setText(newText);
     props.showAlert("Text Cleared", "success");
   };
+
   const handleOnChange = (event) => {
     setText(event.target.value);
   };
+
   const [text, setText] = useState("");
-  let noOfWords = text.length > 0 ? text.trim().split(" ").length : 0;
+
+  let noOfWords = text.length > 0 ? text.trim().split(/\s+/).length : 0;
+
   return (
     <div style={{ color: props.mode === "light" ? "#24292e" : "white" }}>
       <div>
@@ -78,7 +85,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleUpClick}
       >
         Uppercase
@@ -86,7 +93,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleLowerClick}
       >
         Lowercase
@@ -94,7 +101,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleCamClick}
       >
         Camel case
@@ -102,7 +109,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleSnakeClick}
       >
         Snake case
@@ -110,7 +117,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleCopy}
       >
         Copy
@@ -118,7 +125,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleExtraSpaces}
       >
         Remove Extra Spaces
@@ -126,7 +133,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3"
-        disabled={text.length===0}
+        disabled={text.length === 0}
         onClick={handleClearClick}
       >
         Clear Text
