@@ -78,6 +78,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleUpClick}
       >
         Uppercase
@@ -85,6 +86,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleLowerClick}
       >
         Lowercase
@@ -92,6 +94,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleCamClick}
       >
         Camel case
@@ -99,6 +102,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleSnakeClick}
       >
         Snake case
@@ -106,6 +110,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleCopy}
       >
         Copy
@@ -113,6 +118,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3 me-2"
+        disabled={text.length===0}
         onClick={handleExtraSpaces}
       >
         Remove Extra Spaces
@@ -120,6 +126,7 @@ const TextForm = (props) => {
       <button
         type="button"
         className="btn btn-primary mt-3"
+        disabled={text.length===0}
         onClick={handleClearClick}
       >
         Clear Text
